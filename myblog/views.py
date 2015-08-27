@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from myblog.models import *
+import json
 from myblog.serializers import *
 from rest_framework.response import Response
 # Create your views here.
@@ -16,11 +17,14 @@ class PostList(APIView):
 
     def post(self,request, format=None):
         print "what the hell  ",request.data
-        dataset = request.data
-        post_serializer = PostSerializers(data=dataset,many=True)
+        # dataset = []
+        # dataset['username'] = request.data['username']
+        # dataset['post'] = request.data['post']
+        # print "hhhhhhhhhh",dataset
+        post_serializer = PostSerializers(data=request.data,many=True)
         print "Did you say somth ", post_serializer.initial_data
-        if post_serializer.is_valid(raise_exception=True):
-            print post_serializer.errors
+        if post_serializer.is_valid():
+            print " kya bee ",post_serializer.validated_data
             post_serializer.save()
             print "the world", post_serializer.data, "i am    j"
             return Response(post_serializer.data)
