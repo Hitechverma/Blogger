@@ -16,16 +16,12 @@ class PostList(APIView):
 
     def post(self,request, format=None):
         print "what the hell  ",request.data
-        try:
-            serializer = PostSerializers(data=request.data,many=True)
-            print "Did you say somth ", serializer
-            if serializer.isValid():
-                serializer.save()
-                pos = userpost.objects.get(username=request.data['username'])
-                print pos
-                return Response(serializer.data)
-            return Response(serializer.errors)
-        except :
-            print "Except"
-            return Response("Not working")
-
+        dataset = request.data
+        post_serializer = PostSerializers(data=dataset,many=True)
+        print "Did you say somth ", post_serializer.initial_data
+        if post_serializer.is_valid(raise_exception=True):
+            print post_serializer.errors
+            post_serializer.save()
+            print "the world", post_serializer.data, "i am    j"
+            return Response(post_serializer.data)
+        return Response(post_serializer.errors)
