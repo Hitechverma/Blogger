@@ -16,17 +16,10 @@ class PostList(APIView):
         return Response(serializer.data)
 
     def post(self,request, format=json):
-        print "what the hell  ",request.data
-        # dataset = []
-        # dataset['username'] = request.data['username']
-        # dataset['post'] = request.data['post']
-        # print "hhhhhhhhhh",dataset
-        # dd= {'username':'blabla',}
+        # print "what the hell  ",request.data
         post_serializer = PostSerializers(data=request.data)
-        print "Did you say somth ", post_serializer.initial_data
+        # print "Did you say somth ", post_serializer.initial_data
         if post_serializer.is_valid():
-            print " kya bee ",post_serializer.validated_data
             post_serializer.save()
-            print "the world", post_serializer.data, "i am    j"
             return Response(post_serializer.data)
         return Response(post_serializer.errors)
