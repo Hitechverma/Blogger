@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from myblog.models import *
+from django.views.decorators.csrf import ensure_csrf_cookie
 import json
 from myblog.serializers import *
 from rest_framework.response import Response
