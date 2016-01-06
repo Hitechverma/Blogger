@@ -8,6 +8,11 @@ from rest_framework.response import Response
 # Create your views here.
 
 
+class CreateUser(APIView):
+    def post(self,request,format=json):
+        print request.data
+        return Response("its over")
+
 
 class PostList(APIView):
 
