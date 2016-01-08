@@ -10,7 +10,14 @@ from rest_framework.response import Response
 
 class CreateUser(APIView):
     def post(self,request,format=json):
-        print request.data
+        # print request.data
+        userdata = request.data
+        # print thed['User_name']
+        user_serializer = UserSerializers(data = userdata)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            print "yes it is working"
+            return Response(user_serializer.data)
         return Response("its over")
 
 
@@ -22,7 +29,7 @@ class PostList(APIView):
         return Response(serializer.data)
 
     def post(self,request, format=json):
-        # print "what the hell  ",request.data
+        print "what the hell  ",request.data
         post_serializer = PostSerializers(data=request.data)
         # print "Did you say somth ", post_serializer.initial_data
         if post_serializer.is_valid():

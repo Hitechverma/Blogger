@@ -12,4 +12,4 @@ class PostSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = userpost
-        field = ('id','post', 'username')
+        field = ('id','post', 'username', 'main')

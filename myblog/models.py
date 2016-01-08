@@ -18,8 +18,9 @@ class userpost(models.Model):
     post = models.CharField(max_length=200)
     username = models.ForeignKey(user)
     created_at = models.DateTimeField(default=datetime.datetime.now())
+    main = models.CharField(max_length=100, default="NO_name")
 
     def __str__(self):
-        return self.username
+        return self.username.User_name
 
 
