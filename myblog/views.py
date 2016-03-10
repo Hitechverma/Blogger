@@ -10,15 +10,20 @@ from rest_framework.response import Response
 
 class CreateUser(APIView):
     def post(self,request,format=json):
-        # print request.data
+        print request.data
         userdata = request.data
-        # print thed['User_name']
+        print userdata['email']
         user_serializer = UserSerializers(data = userdata)
-        if user_serializer.is_valid():
-            user_serializer.save()
-            print "yes it is working"
-            return Response(user_serializer.data)
-        return Response("its over")
+        if user.objects.get(email = userdata['email']):
+            print "USer already exist"
+            return Response(userdata)
+        # user_check = user.objects.filter(email = "nupuratray94@gmail.com")
+        else:
+            if user_serializer.is_valid():
+                user_serializer.save()
+                print "yes it is working"
+                return Response(user_serializer.data)
+        return Response("Its outer shell")
 
 
 class PostList(APIView):
