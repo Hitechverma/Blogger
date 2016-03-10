@@ -10,9 +10,9 @@ from rest_framework.response import Response
 
 class CreateUser(APIView):
     def post(self,request,format=json):
-        print request.data
+        # print request.data
         userdata = request.data
-        print userdata['email']
+        # print userdata['email']
         
         try:
             if user.objects.get(email = userdata['email']):
@@ -33,6 +33,7 @@ class PostList(APIView):
     def get(self,request, format=None):
         posts = userpost.objects.all()
         serializer = PostSerializers(posts,many=True)
+        print serializer.data
         return Response(serializer.data)
 
     def post(self,request, format=json):

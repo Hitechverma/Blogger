@@ -17,7 +17,7 @@ class userpost(models.Model):
     """docstring for userpost"""
     post = models.CharField(max_length=200)
     username = models.ForeignKey(user)
-    created_at = models.DateTimeField(default=datetime.datetime.now())
+    created_at = models.DateTimeField(default=datetime.datetime.now)
     main = models.CharField(max_length=100, default="NO_name")
 
     def __str__(self):
