@@ -13,12 +13,14 @@ class CreateUser(APIView):
         print request.data
         userdata = request.data
         print userdata['email']
-        user_serializer = UserSerializers(data = userdata)
-        if user.objects.get(email = userdata['email']):
-            print "USer already exist"
-            return Response(userdata)
-        # user_check = user.objects.filter(email = "nupuratray94@gmail.com")
-        else:
+        
+        try:
+            if user.objects.get(email = userdata['email']):
+                print "USer already exist"
+                return Response(userdata)
+                # user_check = user.objects.filter(email = "nupuratray94@gmail.com")
+        except user.DoesNotExist:
+            user_serializer = UserSerializers(data = userdata)
             if user_serializer.is_valid():
                 user_serializer.save()
                 print "yes it is working"
