@@ -5,6 +5,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 import json
 from myblog.serializers import *
 from rest_framework.response import Response
+import datetime 
 # Create your views here.
 
 
@@ -33,7 +34,11 @@ class PostList(APIView):
     def get(self,request, format=None):
         posts = userpost.objects.all()
         serializer = PostSerializers(posts,many=True)
-        print serializer.data
+        # print serializer.data
+        for data in serializer.data:
+            old_datetime = str(data['created_at'])
+            new_datetime = datetime.datetime.strptime(old_datetime,'%Y-%m-%dT%H:%M:%SZ')
+            data['created_at'] = new_datetime.strftime("%Y-%m-%d %H:%M:%S")
         return Response(serializer.data)
 
     def post(self,request, format=json):
