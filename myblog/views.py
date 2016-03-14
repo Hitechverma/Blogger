@@ -49,3 +49,19 @@ class PostList(APIView):
             post_serializer.save()
             return Response(post_serializer.data)
         return Response(post_serializer.errors)
+
+
+class BlogList(APIView):
+    """docstring for BlogList"""
+    def get_object(self, pk):
+        try:
+            return userpost.objects.get(pk=pk)
+        except userpost.DoesNotExist:
+            raise Http404
+
+
+    def get(self,request,pk,format=None):
+        userblog = self.get_object(pk)
+        thepost = PostSerializers(userblog)
+        print thepost.data
+        return Response(thepost.data)
