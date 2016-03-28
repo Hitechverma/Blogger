@@ -17,6 +17,7 @@ class user(models.Model):
 class userpost(models.Model):
     """docstring for userpost"""
     post = models.CharField(max_length=2000)
+    post_title = models.CharField(max_length=500, default="blog")
     username = models.ForeignKey(user)
     created_at = models.DateTimeField(default=timezone.now())
     main = models.CharField(max_length=100, default="NO_name")
