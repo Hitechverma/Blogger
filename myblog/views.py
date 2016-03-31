@@ -18,9 +18,11 @@ class CreateUser(APIView):
         # print userdata['email']
         
         try:
-            if user.objects.get(email = userdata['email']):
+            if user.objects.filter(email = userdata['email']):
+                newdata = user.objects.filter(email = userdata['email'])
                 print "USer already exist"
-                return Response(userdata)
+                print newdata.values()
+                return Response(newdata.values())
                 # user_check = user.objects.filter(email = "nupuratray94@gmail.com")
         except user.DoesNotExist:
             user_serializer = UserSerializers(data = userdata)
