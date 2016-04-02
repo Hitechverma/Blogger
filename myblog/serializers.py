@@ -13,3 +13,9 @@ class PostSerializers(serializers.ModelSerializer):
     class Meta:
         model = userpost
         field = ('id','post', 'post_title', 'username', 'main')
+
+class CommentSerializers(serializers.ModelSerializer):
+	
+	class Meta:
+		model = comment
+		field = ('id', 'blogid', 'author', 'comment_data', 'comment_time')
