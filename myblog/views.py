@@ -67,12 +67,36 @@ class BlogList(APIView):
     def get(self,request,pk,format=None):
         userblog = self.get_object(pk)
         thepost = PostSerializers(userblog)
-        print thepost.data
-        return Response(thepost.data)
+        # print thepost.data
+        my_dict = {}
+        my_dict = thepost.data
+        print my_dict
+        comments = comment.objects.filter(blogid=pk)
+        # print comments
+        comment_list = []  #converting comment into list
+        for comm in comments:
+            comment_list.append(str(comm))
+        print comment_list
+        if comment_list:
+            my_dict.update({'has_comment':True})
+            my_dict.update({'comments':comment_list}) #created a dict and append a list of comment into it
+            print my_dict
+        return Response(my_dict)
 
 class CommentList(APIView):
     """docstring for CommnetList"""
-    def post(self,request, pk, format = None):
+    def post(self,request, pk, format = json):
         print "\n SOMETHING IS COMMING \n"
-        return Response("its working")
+        print request.data
+        comment_serializer = CommentSerializers(data=request.data)
+        if comment_serializer.is_valid():
+            comment_serializer.save()
+            print "\nHULLLLAAAAA\n\n\n"
+            return Response("its working")
+        return Response(comment_serializer.errors)
+
+    def get(self,request,pk,format=None):
+        comments = comment.objects.filter(blogid=pk)
+        print comments
+        return Response("d0ne")
         
