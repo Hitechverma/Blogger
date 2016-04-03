@@ -69,3 +69,10 @@ class BlogList(APIView):
         thepost = PostSerializers(userblog)
         print thepost.data
         return Response(thepost.data)
+
+class CommentList(APIView):
+    """docstring for CommnetList"""
+    def post(self,request, pk, format = None):
+        print "\n SOMETHING IS COMMING \n"
+        return Response("its working")
+        

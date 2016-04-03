@@ -33,6 +33,6 @@ class comment(models.Model):
     comment_time = models.DateTimeField(default=timezone.now())
 
     def __str__(self):
-        return self.author
+        return self.comment_data
         
 
