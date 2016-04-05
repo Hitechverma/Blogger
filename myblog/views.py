@@ -47,6 +47,7 @@ class PostList(APIView):
 
     def post(self,request, format=json):
         print "what the hell  ",request.data
+        print request.data['post']
         post_serializer = PostSerializers(data=request.data)
         # print "Did you say somth ", post_serializer.initial_data
         if post_serializer.is_valid():
