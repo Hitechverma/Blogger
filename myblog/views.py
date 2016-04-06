@@ -47,7 +47,8 @@ class PostList(APIView):
 
     def post(self,request, format=json):
         print "what the hell  ",request.data
-        print request.data['post']
+        blog_content = request.data['post']
+        self.string_ops(str(blog_content))
         post_serializer = PostSerializers(data=request.data)
         # print "Did you say somth ", post_serializer.initial_data
         if post_serializer.is_valid():
@@ -55,6 +56,8 @@ class PostList(APIView):
             return Response(post_serializer.data)
         return Response(post_serializer.errors)
 
+    def string_ops(self,text):
+        print text
 
 class BlogList(APIView):
     """docstring for BlogList"""
