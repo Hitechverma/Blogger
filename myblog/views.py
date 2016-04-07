@@ -58,6 +58,10 @@ class PostList(APIView):
 
     def string_ops(self,text):
         print text
+        if '#' in text:
+            print "Yesss"
+        else:
+            print "Noooooooo"
 
 class BlogList(APIView):
     """docstring for BlogList"""
