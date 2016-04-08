@@ -58,10 +58,18 @@ class PostList(APIView):
 
     def string_ops(self,text):
         print text
-        if '#' in text:
-            print "Yesss"
-        else:
-            print "Noooooooo"
+        hash_list = []
+        text_list = text.split(' ')
+        print text_list
+        for word in text_list:
+            if '#' in word:
+                hash_list.append(word)
+        print hash_list
+
+        # if '#' in text:
+        #     print "Yesss"
+        # else:
+        #     print "Noooooooo"
 
 class BlogList(APIView):
     """docstring for BlogList"""
