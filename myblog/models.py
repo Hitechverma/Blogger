@@ -34,5 +34,10 @@ class comment(models.Model):
 
     def __str__(self):
         return self.comment_data
+
+class hashtag(models.Model):
+    """docstring for hashtags"""
+    blogId = models.ForeignKey(userpost)
+    hashtags = models.ManyToManyField("self")
         
 

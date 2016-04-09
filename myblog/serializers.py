@@ -19,3 +19,9 @@ class CommentSerializers(serializers.ModelSerializer):
 	class Meta:
 		model = comment
 		field = ('id', 'blogid', 'author', 'comment_data', 'comment_time')
+
+class HashtagSerializers(serializers.ModelSerializer):
+	
+	class Meta:
+		model = hashtag 
+		field = ('id', 'blogId', 'hashtags')
