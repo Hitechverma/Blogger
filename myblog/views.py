@@ -53,7 +53,7 @@ class PostList(APIView):
         # print "Did you say somth ", post_serializer.initial_data
         if post_serializer.is_valid():
             post_serializer.save()
-            print post_serializer.data['id']
+            bl_id = post_serializer.data['id']
             return Response(post_serializer.data)
         return Response(post_serializer.errors)
 
