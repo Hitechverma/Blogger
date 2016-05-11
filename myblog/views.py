@@ -60,7 +60,7 @@ class PostList(APIView):
             post_serializer.save()
             bl_id = post_serializer.data['id']
             # print bl_id
-            hashData.update({'blodId':bl_id})
+            hashData.update({'blogId':bl_id})
             hashData.update({'hashtags':hashs})
             print hashData
             hash_serializer = HashtagSerializers(data=hashData)
