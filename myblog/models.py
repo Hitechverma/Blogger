@@ -34,12 +34,18 @@ class comment(models.Model):
 
     def __str__(self):
         return self.comment_data
+class hashs(models.Model):
+    """docstring for hashs"""
+    hashname = models.CharField(max_length=40)
 
+    def __str__(self):
+        return self.hashname
+        
 class hashtag(models.Model):
     """docstring for hashtags"""
     blogId = models.ForeignKey(userpost)
-    # hashs = models.textfield(null=True)
-    hashtags = models.ManyToManyField('self')
+    # hashs = models.CharField(max_length=140)
+    hashtags = models.ManyToManyField(hashs)
     @property
     def hashlist(self):
         # Watch for large querysets: it loads everything in memory
