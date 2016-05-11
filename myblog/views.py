@@ -25,11 +25,13 @@ class CreateUser(APIView):
                 return Response(newdata.values())
                 # user_check = user.objects.filter(email = "nupuratray94@gmail.com")
         except user.DoesNotExist:
-            user_serializer = UserSerializers(data = userdata)
-            if user_serializer.is_valid():
-                user_serializer.save()
-                print "yes it is working"
-                return Response(user_serializer.data)
+            print "will not working"
+        print "what th hell yaar"
+        user_serializer = UserSerializers(data = userdata)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            print "yes it is working"
+            return Response(user_serializer.data)
         return Response("Its outer shell")
 
 
@@ -47,13 +49,23 @@ class PostList(APIView):
 
     def post(self,request, format=json):
         print "what the hell  ",request.data
-        # blog_content = request.data['post']
-        # self.string_ops(str(blog_content))
+        blog_content = request.data['post']
+        # print blog_content
+        hashs = self.string_ops(str(blog_content))
+        print hashs
+        hashData = {}
         post_serializer = PostSerializers(data=request.data)
         # print "Did you say somth ", post_serializer.initial_data
         if post_serializer.is_valid():
             post_serializer.save()
             bl_id = post_serializer.data['id']
+            # print bl_id
+            hashData.update({'blodId':bl_id})
+            hashData.update({'hashtags':hashs})
+            print hashData
+            hash_serializer = HashtagSerializers(data=hashData)
+            if hash_serializer.is_valid():
+                print "chal gaya yaar aakhir"
             return Response(post_serializer.data)
         return Response(post_serializer.errors)
 
@@ -61,11 +73,15 @@ class PostList(APIView):
         print text
         hash_list = []
         text_list = text.split(' ')
-        print text_list
+        # print text_list
         for word in text_list:
             if '#' in word:
                 hash_list.append(word)
-        print hash_list
+        return hash_list
+        # print bl_id
+        # hash_serializer = HashtagSerializers(data=hash_list)
+        # if hash_serializer.is_valid():
+        #     print hash_serializer.data
 
         # if '#' in text:
         #     print "Yesss"

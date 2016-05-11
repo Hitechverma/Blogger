@@ -6,3 +6,4 @@ from myblog.models import *
 admin.site.register(userpost)
 admin.site.register(user)
 admin.site.register(comment)
+admin.site.register(hashtag)
