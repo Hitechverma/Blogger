@@ -106,7 +106,7 @@ DATABASES = {
         'NAME': 'blog',
         'USER': 'root',
         'PASSWORD': 'hitech',
-        'HOST': '0.0.0.0',                      # Empty for localhost through domain sockets or   '127.0.0.1' for localhost through TCP.
+        'HOST': 'localhost',                      # Empty for localhost through domain sockets or   '127.0.0.1' for localhost through TCP.
         'PORT': '',
     }
 }
